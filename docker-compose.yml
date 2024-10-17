@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend  # Build context set to backend folder
+      dockerfile: Dockerfile 
+    ports:
+      - "8000:8000"  # Map port 8000
+    env_file:
+      - ./backend/.env  # Corrected path for the .env file
+    volumes:
+      - ./backend:/app  # Sync backend folder with /app in the container
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"  # Map port 27017 for MongoDB
+    volumes:
+      - mongo_data:/data/db  # MongoDB data persistence
+
+volumes:
+  mongo_data:
