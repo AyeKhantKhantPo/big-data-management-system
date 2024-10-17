@@ -18,7 +18,7 @@ collection = db["news_sources"]
 @router.get("/news-sources", response_model=PaginatedNewsSources)
 async def get_news_sources(
     page: int = Query(1, ge=1),
-    limit: int = Query(10, gt=0),
+    limit: int = Query(10, gt=-1),
     search: str = Query(None),
     source_id: str = Query(None),
     category: str = Query(None),
@@ -51,15 +51,20 @@ async def get_news_sources(
     if language:
         query["language"] = language
 
-    # Paginate the results
-    skip = (page - 1) * limit
-    news_sources = list(collection.find(query).skip(skip).limit(limit))
+    if limit == 0:
+        # Get all sources without limit
+        news_sources = list(collection.find(query))
+    else:
+        # Paginate the results
+        skip = (page - 1) * limit
+        news_sources = list(collection.find(query).skip(skip).limit(limit))
+
     total_count = collection.count_documents(query)
 
     # Prepare pagination info
     next_page = (
         f"/api/news-sources?page={page + 1}&limit={limit}"
-        if (page * limit) < total_count
+        if (page * limit) < total_count and limit != 0
         else None
     )
     previous_page = (
