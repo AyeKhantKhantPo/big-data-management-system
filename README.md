@@ -31,12 +31,12 @@ The system has three key components: a Python script that collects data from New
 
 ## Setup Instructions
 
-### 1. Clone the Repository
+### Clone the Repository
 ```bash
 $ git clone https://github.com/your-username/big-data-management-system.git
 $ cd big-data-management-system
 ```
-### 2. Frontend Setup with NPM
+### 1. Frontend Setup with NPM
 ```
 $ cd frontend/big-data-ui
 $ npm install
@@ -44,24 +44,39 @@ $ npm run dev # For Start development server
 $ npm run build # Build for production
 ```
 
-### 2. Backend and MongoDB Setup with Docker Compose
+### 2. Backend and MongoDB Setup
 ```
 $ cd backend
 $ cp .env.example .env # Update the environment variables in .env as needed
 ```
-- Run `docker-compose up --build` to start the backend and MongoDB. Alternatively, you can start the backend manually by running `uvicorn app.main:app --host 0.0.0.0 --port 8000`.
+- Setup backend service and MongoDB using `docker-compose`:
+```
+$ docker-compose up --build
+```
+(OR)
+- Setup backend service using `venv`:
+```
+$ python -m venv .venv
+$ source .venv/bin/activate
+$ pip install --no-cache-dir -r requirements.txt
+$ uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+- **Note:** The FastAPI backend will run at http://localhost:8000, and MongoDB will be accessible at port 27017.
+- The **Backend API documentation** for the project is available at [API Docs](https://github.com/AyeKhantKhantPo/big-data-management-system/blob/main/docs/big-data-api-docs.html).
 
-  **Note:** The FastAPI backend will run at http://localhost:8000, and MongoDB will be accessible at port 27017.
-
-  **Running Steps:**
-  - For the News collector cron job, run the following command.:
+ ### 3. Cron Job for Data Collection
+- The News collector cron job is scheduled to run every 24 hours to fetch the latest updated data.
+- Setup script using `venv`:
+ ```
+ $ source .venv/bin/activate
+ $ python -m app.script.news_data_collector
+ ```
+ (OR)
+  - Setup script using `docker`:
    ![cron data collect ](docs/image/cron-data-collect.png)
   - Data Collection Log
    ![data collect log ](docs/image/data-collect-log.png)
 
-
-  **Backend API Documentation**
-  - The API documentation for the project is available at [API Docs](https://github.com/AyeKhantKhantPo/big-data-management-system/blob/main/docs/big-data-api-docs.html).
 
 ## Demo
 - The Frontend UI is accessible at http://localhost:5173/
