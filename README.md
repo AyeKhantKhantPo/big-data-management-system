@@ -62,7 +62,8 @@ $ pip install --no-cache-dir -r requirements.txt
 $ uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 - **Note:** The FastAPI backend will run at http://localhost:8000, and MongoDB will be accessible at port 27017.
-- The **Backend API documentation** for the project is available at [API Docs](https://github.com/AyeKhantKhantPo/big-data-management-system/blob/main/docs/big-data-api-docs.html).
+- The **Backend API documentation** for the project is available at http://localhost:8000/docs.
+![API Doc ](docs/image/api-docs.png)
 
  ### 3. Cron Job for Data Collection
 - The News collector cron job is scheduled to run every 24 hours to fetch the latest updated data.
@@ -72,24 +73,24 @@ $ uvicorn app.main:app --host 0.0.0.0 --port 8000
  $ python -m app.script.news_data_collector
  ```
  (OR)
-  - Setup script using `docker`:
-   ![cron data collect ](docs/image/cron-data-collect.png)
-  - Data Collection Log
-   ![data collect log ](docs/image/data-collect-log.png)
+- Setup script using `docker`:
+![cron data collect ](docs/image/cron-data-collect.png)
+- Data Collection Log
+![data collect log ](docs/image/data-collect-log.png)
 
 
 ## Demo
 - The Frontend UI is accessible at http://localhost:5173/
   
 - **Dashboard Page:**
-  ![Dashboard](docs/image/dashboard.png)
+![Dashboard](docs/image/dashboard.png)
   
 - **List View Page:**
-  ![Data](docs/image/data.png)
+![Data](docs/image/data.png)
   
 - **Filter Support in List View:**
-  ![Filter1](docs/image/filter1.png)
-  ![Filter2](docs/image/filter2.png)
+![Filter1](docs/image/filter1.png)
+![Filter2](docs/image/filter2.png)
   
 - **Download Filtered Data as CSV:**
-  ![Download](docs/image/download.png)
+![Download](docs/image/download.png)
