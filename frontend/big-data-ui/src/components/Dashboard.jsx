@@ -109,7 +109,7 @@ const Dashboard = () => {
       ) : (
         <Grid container spacing={3}>
           {/* Bar Chart */}
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Typography variant="h6" gutterBottom>
               Top 5 News Categories
             </Typography>
@@ -131,7 +131,7 @@ const Dashboard = () => {
           </Grid>
 
           {/* Pie Chart */}
-          <Grid item xs={12} md={6}>
+          <Grid xs={12} md={6}>
             <Typography variant="h6" gutterBottom>
               Top 5 News Sources by Country
             </Typography>

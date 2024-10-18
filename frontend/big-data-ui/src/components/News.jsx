@@ -97,7 +97,6 @@ const NewsData = () => {
           onPaginationModelChange={setPaginationModel} // Update pagination model on page/pageSize change
           onPageChange={(newPage) => setPage(newPage + 1)} // DataGrid pages are 0-based
           onPageSizeChange={(newSize) => setPageSize(newSize)}
-          loading={loading} // Show loading indicator while fetching data
           slots={{ toolbar: GridToolbar }}
         />
       </div>

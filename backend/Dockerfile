@@ -4,6 +4,9 @@ FROM python:3.9-slim
 # Set the working directory inside the container
 WORKDIR /app
 
+# Copy the .env.example file to .env inside the container
+COPY .env.example /app/.env
+
 # Copy all project files into the container
 COPY . .
 

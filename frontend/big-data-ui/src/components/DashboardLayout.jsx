@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState} from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
 import { extendTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -39,33 +39,25 @@ const demoTheme = extendTheme({
   },
 });
 
-// function useDemoRouter(initialPath) {
-//   const [pathname, setPathname] = React.useState(initialPath);
-
-//   const router = React.useMemo(() => {
-//     return {
-//       pathname,
-//       searchParams: new URLSearchParams(),
-//       navigate: (path) => setPathname(String(path)),
-//     };
-//   }, [pathname]);
-
-//   return router;
-// }
-
 export default function DashboardLayoutBasic(props) {
   const { window } = props;
-
-  // const router = useDemoRouter("/dashboard");
   const navigate = useNavigate();
+
+  // Add state to manage the toggle state of the menu
+  const [isMenuOpen, setMenuOpen] = useState(false); // Default is false (collapsed)
 
   // Handle navigation for each item
   const handleNavigation = (segment) => {
     if (segment === "dashboard") {
-      router.navigate("/dashboard");
+      navigate("/dashboard");
     } else if (segment === "news") {
-      router.navigate("/news");
+      navigate("/news");
     }
+  };
+
+  // Function to toggle the menu
+  const toggleMenu = () => {
+    setMenuOpen((prevOpen) => !prevOpen); // Toggle the menu state
   };
 
   // Remove this const when copying and pasting into your project.
@@ -81,9 +73,10 @@ export default function DashboardLayoutBasic(props) {
         logo: <img src="../../assets/data.png" alt="Data logo" />,
         title: "Big Data Management System",
       }}
-      // router={router}
       theme={demoTheme}
       window={demoWindow}
+      isMenuOpen={isMenuOpen} // Control menu toggle state
+      onToggleMenu={toggleMenu} // Function to toggle the menu
     >
       <DashboardLayout>
         <Routes>
